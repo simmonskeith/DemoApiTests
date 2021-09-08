@@ -1,0 +1,8 @@
+
+
+# C# binary folders
+bin
+obj
+
+# Visual Studio
+.vs

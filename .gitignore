@@ -6,3 +6,6 @@ obj
 
 # Visual Studio
 .vs
+
+# Test Results
+TestResults

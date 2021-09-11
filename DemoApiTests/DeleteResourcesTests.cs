@@ -1,0 +1,47 @@
+﻿using Xunit;
+using RestSharp;
+using System.Collections.Generic;
+using System.Linq;
+using FluentAssertions;
+using DemoApiTests.Dto;
+
+namespace DemoApiTests
+{
+    /// <summary>
+    /// Tests related to the DELETE operation for the API under test.
+    /// </summary>
+    public class DeleteResourcesTests : DemoApiTestBase
+    {
+        [Fact]
+        public void DeleteExistingResourceShouldReturnOkStatus()
+        {
+            //arrange
+            int id = 10;
+            var request = new RestRequest($"posts/{id}", Method.DELETE);
+
+            //act
+            var response = client.Execute(request);
+
+            //assert
+           response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+
+        
+        [Fact]
+        public void DeleteInvalidResourceShouldReturnOkStatus()
+        {
+            // the reasoning here is that the client wanted the resource deleted, so if it didn't exist
+            // to begin with, mission accomplished.
+
+            //arrange
+            int id = 0;
+            var request = new RestRequest($"posts/{id}", Method.DELETE);
+
+            //act
+            var response = client.Execute(request);
+
+            //assert
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+    }
+}

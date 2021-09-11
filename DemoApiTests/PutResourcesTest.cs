@@ -10,7 +10,7 @@ namespace DemoApiTests
     public class PutResourcesTest : DemoApiTestBase
     {
         [Fact]
-        public void PutUpdatePostIncludingIdInBodyShouldUpdatePost()
+        public void Put_Update_Post_With_Id_In_Body_Should_Update_Post()
         {
             //TODO: what if the route Id != body Id...
 
@@ -31,7 +31,7 @@ namespace DemoApiTests
         }
 
         [Fact]
-        public void PutUpdatePostWithoutIdInBodyShouldReturnUpdatePost()
+        public void Put_Update_Post_Without_Id_In_Body_Should_Update_Post()
         {
             var id = 8;
             var body = new 
@@ -53,7 +53,7 @@ namespace DemoApiTests
         }
 
         [Fact]
-        public void PutUpdatePostPartialDataShouldInsertNullsInMissingItems()
+        public void Put_Update_Post_Partial_Data_Should_Null_Missing_Items()
         {
             var id = 8;
             var body = new 
@@ -73,7 +73,7 @@ namespace DemoApiTests
         }
 
         [Fact]
-        public void PutUpdatePostUsingInvalidPostIdShouldReturnError()
+        public void Put_Update_Post_Using_Invalid_Post_Id_Should_Return_Error()
         {
             //TODO: should probably return 404 not found given the non-existing post id
 
@@ -93,7 +93,7 @@ namespace DemoApiTests
         }
 
         [Fact]
-        public void PutUpdatePostUsingInvalidUserIdShouldReturnError()
+        public void Put_Update_Post_Using_Invalid_User_Id_Should_Return_Error()
         {
             //TODO: should probably return bad request given the invalid user id
 

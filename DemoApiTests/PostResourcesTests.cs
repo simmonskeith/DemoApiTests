@@ -11,7 +11,7 @@ namespace DemoApiTests
     public class PostResourcesTests : DemoApiTestBase
     {
         [Fact]
-        public void PostOfNewPostShouldReturnNewPost()
+        public void Post_New_Post_Should_Create_New_Post()
         {
             var body = new Dictionary<string, string>()
             {
@@ -32,11 +32,11 @@ namespace DemoApiTests
         }
 
         [Fact]
-        public void PostOfPostUsinNewIdShouldCreatedNewPostWithNextId()
+        public void Post_Using_New_Id_Should_Create_New_Post_With_Next_Id()
         {
             var body = new Post()
             {
-                id = 111,
+                id = 250,
                 userId = 10,
                 title = Faker.Lorem.Sentence(7),
                 body = string.Join('\n', Faker.Lorem.Sentences(2))
@@ -52,7 +52,7 @@ namespace DemoApiTests
         }
 
         [Fact]
-        public void PostOfPostUsingExistingPostIdShouldCreateNewPostWithNextId()
+        public void Post_Using_Existing_Post_Id_Should_Create_New_Post_With_Next_Id()
         {
             var body = new Post()
             {
@@ -72,7 +72,7 @@ namespace DemoApiTests
         }
 
         [Fact]
-        public void PostWithoutContentShouldReturnOKStatus()
+        public void Post_Without_Content_Should_Create_New_Post()
         {
             //TODO: although a new record is "created", the related data is null which is probably not ideal.
 
@@ -86,7 +86,7 @@ namespace DemoApiTests
         }
 
         [Fact]
-        public void PostWithIrrelevantBodyShouldReturnNewPost()
+        public void Post_With_Irrelevant_Body_Should_Create_New_Post()
         {
             var body = new 
             {
@@ -103,7 +103,7 @@ namespace DemoApiTests
         }
 
         [Fact]
-        public void PostOfCommentShouldCreateNewComment()
+        public void Post_Comment_Should_Create_New_Comment()
         {
             var body = new Comment()
             {
@@ -126,7 +126,7 @@ namespace DemoApiTests
         }
 
         [Fact]
-        public void PostCommentWithNewCommentIdShouldCreateNewCommentWithNextId()
+        public void Post_Comment_With_New_Comment_Id_Should_Create_Comment_With_Next_Id()
         {
             var body = new Comment()
             {
@@ -147,7 +147,7 @@ namespace DemoApiTests
         }
 
         [Fact]
-        public void PostCommentUsingExistingCommentIdShouldCreateNewCommentWithNextId()
+        public void Post_Comment_With_Existing_Comment_Id_Should_Create_Comment_With_Next_Id()
         {
             var body = new Comment()
             {
@@ -169,7 +169,7 @@ namespace DemoApiTests
         }
 
         [Fact]
-        public void PostOfNewCommentWithInvalidPostIdShouldReturnBadRequest()
+        public void Post_Comment_With_Invalid_Post_Id_Should_Return_Bad_Request()
         {
             //TODO: creating with reference to invalid post id would probably be a bug 
 

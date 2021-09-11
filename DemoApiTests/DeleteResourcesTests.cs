@@ -13,7 +13,7 @@ namespace DemoApiTests
     public class DeleteResourcesTests : DemoApiTestBase
     {
         [Fact]
-        public void DeleteExistingResourceShouldReturnOkStatus()
+        public void Delete_Existing_Post_Should_Return_Ok_Status()
         {
             //arrange
             int id = 10;
@@ -28,7 +28,7 @@ namespace DemoApiTests
 
         
         [Fact]
-        public void DeleteInvalidResourceShouldReturnOkStatus()
+        public void Delete_Invalid_Post_Should_Return_Ok_Status()
         {
             // the reasoning here is that the client wanted the resource deleted, so if it didn't exist
             // to begin with, mission accomplished.

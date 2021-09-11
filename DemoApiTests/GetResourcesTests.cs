@@ -17,10 +17,10 @@ namespace DemoApiTests
     {
         
         [Fact]
-        public void GetAllPostsShouldReturnOkStatus()
+        public void Get_All_Posts_Should_Return_All_Posts()
         {
             //arrange
-            // we know this for the test api, but it would be better to pull the count from our data source
+            // we know the count of posts for the test api, but it would be better to pull the count from our data source
             var expectedItems = 100;  
             var request = new RestRequest("posts", Method.GET);
 
@@ -29,14 +29,13 @@ namespace DemoApiTests
 
             //assert
             response.StatusCode.Should().Be(HttpStatusCode.OK);
-            
             response.Data.Count().Should().Be(expectedItems);
         }
 
         [Theory]
         [InlineData("Content-Type", "application/json; charset=utf-8")]
         [InlineData("Connection", "keep-alive")]
-        public void GetAllPostsHeadersTest(string header, string value)
+        public void Get_All_Posts_Header_Items_Test(string header, string value)
         {
             //arrange
             var request = new RestRequest("posts", Method.GET);
@@ -57,7 +56,7 @@ namespace DemoApiTests
         [InlineData(1, "sunt aut facere repellat provident occaecati excepturi optio reprehenderit")]
         [InlineData(25, "rem alias distinctio quo quis")]
         [InlineData(100, "at nam consequatur ea labore ea harum")]
-        public void GetPostsShouldReturnRequestedPost(int id, string title)
+        public void Get_Post_By_Id_Should_Return_Requested_Post(int id, string title)
         {
             //arrange
             var request = new RestRequest($"posts/{id}");
@@ -70,7 +69,7 @@ namespace DemoApiTests
         }
 
         [Fact]
-        public void GetPostByInvalidPostIdShouldReturnNotFound()
+        public void Get_Post_By_Invalid_Post_Id_Should_Return_Not_Found()
         {
             //arrange
             int id = 0;
@@ -86,7 +85,7 @@ namespace DemoApiTests
         [Theory]
         [InlineData(1, new int[] { 1, 2, 3, 4, 5 })]
         [InlineData(7, new int[] { 31, 32, 33, 34, 35})]
-        public void GetCommentByPostIdShouldReturnCommentsForRequestedPost(int postId, int[] ids)
+        public void Get_Comments_By_Post_Id_Should_Return_Comments_For_Post(int postId, int[] ids)
         {
             var request = new RestRequest($"comments?postId={postId}", Method.GET);
 
@@ -101,7 +100,7 @@ namespace DemoApiTests
         [InlineData("0")]
         [InlineData("501")]
         [InlineData("foo")]
-        public void GetCommentByInvalidPostIdShouldNotReturnComments(string postId)
+        public void Get_Comments_By_Invalid_Post_Id_Should_Not_Return_Comments(string postId)
         {
             var request = new RestRequest($"comments?postId={postId}", Method.GET);
 

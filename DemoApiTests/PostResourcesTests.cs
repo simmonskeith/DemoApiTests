@@ -13,11 +13,11 @@ namespace DemoApiTests
         [Fact]
         public void Post_New_Post_Should_Create_New_Post()
         {
-            var body = new Dictionary<string, string>()
+            var body = new 
             {
-                { "userId", "10" },
-                { "title", Faker.Lorem.Sentence(4) },
-                { "body", string.Join('\n', Faker.Lorem.Sentences(2)) }
+                userId = 10,
+                title = Faker.Lorem.Sentence(4),
+                body = string.Join('\n', Faker.Lorem.Sentences(2))
             };
             var request = new RestRequest($"posts", Method.POST);
             request.AddJsonBody(body);
@@ -26,9 +26,9 @@ namespace DemoApiTests
 
             response.StatusCode.Should().Be(HttpStatusCode.Created);
             response.Data.id.Should().Be(101);
-            response.Data.userId.Should().Be(int.Parse(body["userId"]));
-            response.Data.title.Should().Be(body["title"]);
-            response.Data.body.Should().Be(body["body"]);
+            response.Data.userId.Should().Be(body.userId);
+            response.Data.title.Should().Be(body.title);
+            response.Data.body.Should().Be(body.body);
         }
 
         [Fact]
@@ -100,6 +100,34 @@ namespace DemoApiTests
 
             response.StatusCode.Should().Be(HttpStatusCode.Created);
             response.Data.Should().BeEquivalentTo(new Post() { id = 101 });
+        }
+
+        [Theory]
+        [InlineData("Content-Type", "application/json; charset=utf-8")]
+        [InlineData("Connection", "keep-alive")]
+        [InlineData("Location", "http://jsonplaceholder.typicode.com/posts/101")]
+        public void Post_Posts_Response_Header_Items(string header, string value)
+        {
+            //arrange
+            var body = new
+            {
+                userId = 10,
+                title = Faker.Lorem.Sentence(4),
+                body = string.Join('\n', Faker.Lorem.Sentences(2))
+            };
+            var request = new RestRequest($"posts", Method.POST);
+            request.AddJsonBody(body);
+
+            //act
+            var response = client.Execute<Post>(request);
+            var headerValue = response.Headers
+                .Where(x => x.Name == header)
+                .Select(x => x.Value.ToString())
+                .FirstOrDefault();
+
+            //assert
+            headerValue.Should().Be(value);
+
         }
 
         [Fact]

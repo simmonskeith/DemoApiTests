@@ -35,7 +35,7 @@ namespace DemoApiTests
         [Theory]
         [InlineData("Content-Type", "application/json; charset=utf-8")]
         [InlineData("Connection", "keep-alive")]
-        public void Get_All_Posts_Header_Items_Test(string header, string value)
+        public void Get_Posts_Response_Header_Items(string header, string value)
         {
             //arrange
             var request = new RestRequest("posts", Method.GET);

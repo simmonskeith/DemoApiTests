@@ -15,6 +15,7 @@ namespace DemoApiTests
         [Fact]
         public void Delete_Existing_Post_Should_Return_Ok_Status()
         {
+            // TODO: because no content is returned, this should probably return 204 NO CONTENT
             //arrange
             int id = 10;
             var request = new RestRequest($"posts/{id}", Method.DELETE);
